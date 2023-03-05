@@ -57,6 +57,8 @@ function onImgPreviewClick(event) {
     }
   }
 
+  //Remove listener
+
   function removeListener() {
     window.removeEventListener('keydown', onEscKey);
   }
