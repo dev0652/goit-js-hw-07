@@ -48,13 +48,17 @@ function onImgPreviewClick(event) {
   const instance = basicLightbox.create(`<img src="${target.dataset.source}">`);
 
   function onLightBoxOpen() {
-    window.addEventListener('keydown', onEscKey, { once: true });
+    window.addEventListener('keydown', onEscKey);
   }
 
   function onEscKey(event) {
     if (event.code === 'Escape') {
-      instance.close();
+      instance.close(removeListener);
     }
+  }
+
+  function removeListener() {
+    window.removeEventListener('keydown', onEscKey);
   }
 
   // Show a full-sized image + listen to Esc key press
