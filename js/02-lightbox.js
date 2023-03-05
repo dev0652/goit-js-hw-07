@@ -20,12 +20,12 @@ function createGalleryMarkup(arrayOfObjects) {
     .join('');
 }
 
-// Create gallery markup
-const galleryMarkup = createGalleryMarkup(galleryItems);
-
-// Insert gallery markup
+// Create and insert gallery markup
 const galleryContainer = document.querySelector('.gallery');
-galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+galleryContainer.insertAdjacentHTML(
+  'beforeend',
+  createGalleryMarkup(galleryItems)
+);
 
 // Listen to clicks
 galleryContainer.addEventListener('click', onImgPreviewClick);
@@ -45,6 +45,5 @@ function onImgPreviewClick(event) {
   return new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
-    history: false,
   });
 }

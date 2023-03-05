@@ -22,12 +22,13 @@ function createGalleryMarkup(arrayOfObjects) {
     .join('');
 }
 
-const galleryMarkup = createGalleryMarkup(galleryItems);
-
-// Insert gallery markup
+// Create and insert gallery markup
 const galleryContainer = document.querySelector('.gallery');
 
-galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+galleryContainer.insertAdjacentHTML(
+  'beforeend',
+  createGalleryMarkup(galleryItems)
+);
 
 // Listen to clicks
 galleryContainer.addEventListener('click', onImgPreviewClick);
