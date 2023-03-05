@@ -27,23 +27,7 @@ galleryContainer.insertAdjacentHTML(
   createGalleryMarkup(galleryItems)
 );
 
-// Listen to clicks
-galleryContainer.addEventListener('click', onImgPreviewClick);
-
-function onImgPreviewClick(event) {
-  event.preventDefault();
-  const target = event.target;
-
-  // Check if the clicked area is an image
-  const isImagePreview = target.classList.contains('gallery__image');
-
-  if (!isImagePreview) {
-    return;
-  }
-
-  // Create a SimpleLightbox instance
-  return new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-}
+new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
