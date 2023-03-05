@@ -2,7 +2,6 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 // Create gallery markup
-
 function createGalleryMarkup(arrayOfObjects) {
   return arrayOfObjects
     .map(
@@ -26,13 +25,11 @@ function createGalleryMarkup(arrayOfObjects) {
 const galleryMarkup = createGalleryMarkup(galleryItems);
 
 // Insert gallery markup
-
 const galleryContainer = document.querySelector('.gallery');
 
 galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 // Listen to clicks
-
 galleryContainer.addEventListener('click', onImgPreviewClick);
 
 function onImgPreviewClick(event) {
