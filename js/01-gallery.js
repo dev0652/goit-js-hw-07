@@ -1,12 +1,13 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-// 1. Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї
+// Create gallery markup
 
-const galleryCnt = document.querySelector('.gallery');
-
-function makeItemMarkup({ preview, original, description }) {
-  return `
+function createGalleryMarkup(arrayOfObjects) {
+  return arrayOfObjects
+    .map(
+      ({ preview, original, description }) =>
+        `
     <div class="gallery__item">
     <a class="gallery__link" href="${original}">
         <img
@@ -17,15 +18,47 @@ function makeItemMarkup({ preview, original, description }) {
         />
     </a>
     </div>
-    `;
+    `
+    )
+    .join('');
 }
 
-const galleryMarkup = galleryItems.map(makeItemMarkup).join('');
+const galleryMarkup = createGalleryMarkup(galleryItems);
 
-galleryCnt.insertAdjacentHTML('beforeend', galleryMarkup);
+// Insert gallery markup
 
-// 2. Реалізація делегування на div.gallery і отримання url великого зображення.
+const galleryContainer = document.querySelector('.gallery');
 
-galleryCnt.addEventListener('click', handleImgClick);
+galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
-function openLargeImg(e) {}
+// Listen to clicks
+
+galleryContainer.addEventListener('click', onImgPreviewClick);
+
+function onImgPreviewClick(event) {
+  event.preventDefault();
+  const target = event.target;
+
+  // Check if the clicked area is an image
+  const isImagePreview = target.classList.contains('gallery__image');
+
+  if (!isImagePreview) {
+    return;
+  }
+
+  // Create a basicLightbox image instance
+  const instance = basicLightbox.create(`<img src="${target.dataset.source}">`);
+
+  function onLightBoxOpen() {
+    window.addEventListener('keydown', onEscKey, { once: true });
+  }
+
+  function onEscKey(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  }
+
+  // Show a full-sized image + listen to Esc key press
+  return instance.show(onLightBoxOpen);
+}
